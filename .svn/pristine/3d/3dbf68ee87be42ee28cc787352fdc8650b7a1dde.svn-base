@@ -1,0 +1,15 @@
+    <hr>
+            <footer>
+                <p>&copy; Martin A. Rodriguez</p>
+            </footer>
+        </div>
+        <!--/.fluid-container-->
+        <script src="<?php echo base_url('public/vendors/jquery-1.9.1.min.js');?>"></script>
+        <script src="<?php echo base_url('public/bootstrap/js/bootstrap.min.js');?>"></script>
+        <script src="<?php echo base_url('public/vendors/easypiechart/jquery.easy-pie-chart.js');?>"></script>
+        <script src="<?php echo base_url('public/assets/scripts.js');?>"></script>
+        <script src="<?php echo base_url('public/vendors/jGrowl/jquery.jgrowl.js');?>"></script>
+        
+    </body>
+
+</html>

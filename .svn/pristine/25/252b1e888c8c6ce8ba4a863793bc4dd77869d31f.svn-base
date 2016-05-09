@@ -1,0 +1,53 @@
+s.controller('modulosController',function($scope, $http, $upload, $routeParams, $location){
+	$scope.params = $routeParams;
+	$scope.id_usr = $scope.params.id_usr;
+	$scope.tp_usr = $scope.params.tp_usr;
+
+	menu_lateral_activar($scope.id_usr,$scope.tp_usr);//ACTIVAMOS EL MENU
+	
+	
+	$scope.modulos = [];//MODULOS
+
+	$scope.usr = [];
+
+	function lista_modulos(){
+		$http.post('modulos/modulosLista').success(function(data){
+			$scope.modulos = data;
+		});
+	}
+	lista_modulos();
+
+	$scope.sistema_modulos = function (id) {
+		$scope.appz_titulo = "Aplicaciones, Modulo #"+id;
+	}
+	
+	//Retorna el Tipo de Usuario
+	function usr_reg_tpusr(id){
+		$http.post('modulos/usr_reg_tpusr',{id:id}).success(function(data){
+			return data;
+		});
+	}
+
+	//Activa los menues laterales!
+	function menu_lateral_activar(id_usr){
+		$scope.tp_usr = usr_reg_tpusr(id_usr);//tipo de usuario
+		alert($scope.tp_usr);
+		
+		$scope.check_if_ml = false;
+		$scope.check_if_ml_desactivar_todos = false;
+		$scope.menu_lateral = [{menu_titulo:'Crear', menu_accion:'#/formulario'}];
+		
+		switch(true) {
+		    case ($scope.tp_usr == 1):
+		    case ($scope.tp_usr == 2):		    	
+		    	$scope.menu_lateral.push({menu_titulo:'Editar', menu_accion:'#/formulario/'+id_usr});
+		    	$scope.menu_lateral.push({menu_titulo:'Ver modulos', menu_accion:'#/'+id_usr});				
+		    	break;
+
+		    case ($scope.tp_usr == 3):
+		    	$scope.check_if_ml_desactivar_todos = true;
+		        break;
+		}		
+	} 
+
+});

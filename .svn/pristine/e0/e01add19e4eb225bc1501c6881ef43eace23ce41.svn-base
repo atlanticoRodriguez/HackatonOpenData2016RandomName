@@ -1,0 +1,132 @@
+-- phpMyAdmin SQL Dump
+-- version 4.1.12
+-- http://www.phpmyadmin.net
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 29-08-2014 a las 12:11:33
+-- Versión del servidor: 5.6.16
+-- Versión de PHP: 5.5.11
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Base de datos: `db_logon`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `appusr`
+--
+
+CREATE TABLE IF NOT EXISTS `appusr` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `iduser` int(20) NOT NULL,
+  `idappz` int(11) NOT NULL,
+  `activa` int(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `appz`
+--
+
+CREATE TABLE IF NOT EXISTS `appz` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_mods` int(11) NOT NULL,
+  `appz_padre` int(11) NOT NULL DEFAULT '0',
+  `controlador` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `descr` varchar(40) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `activa` int(1) NOT NULL,
+  `icono` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL DEFAULT 'icon-folder-close',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `modulos`
+--
+
+CREATE TABLE IF NOT EXISTS `modulos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `descr` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `path` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `activa` int(1) NOT NULL,
+  `icono` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL DEFAULT 'icon-folder-close',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipousr`
+--
+
+CREATE TABLE IF NOT EXISTS `tipousr` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `descr` varchar(45) CHARACTER SET latin1 NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=7 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usr`
+--
+
+CREATE TABLE IF NOT EXISTS `usr` (
+  `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
+  `idtipousr` int(2) NOT NULL DEFAULT '0',
+  `username` varchar(15) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `password` varchar(40) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `email` varchar(254) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `created_on` datetime NOT NULL,
+  `active` char(1) DEFAULT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `tipousr_idx` (`idtipousr`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usrhit`
+--
+
+CREATE TABLE IF NOT EXISTS `usrhit` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `iduser` int(11) NOT NULL,
+  `last_access` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ip_access` varchar(55) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`iduser`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=244 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usrmods`
+--
+
+CREATE TABLE IF NOT EXISTS `usrmods` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `iduser` int(11) NOT NULL,
+  `idmods` int(11) NOT NULL,
+  `active` char(1) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`iduser`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

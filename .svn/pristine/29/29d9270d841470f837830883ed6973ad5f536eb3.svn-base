@@ -1,0 +1,13 @@
+os.controller('obrasocialControllers', function($scope, $http) {
+	$scope.obrasociales = [];
+
+	function obrasociales(){
+		$.post('obrasocial/obrasociales')
+		.success(function(data){
+			$scope.obrasociales = data;
+		});
+	}
+
+	obrasociales();
+
+});

@@ -1,0 +1,75 @@
+var r = angular.module('usuarios', ['ngRoute','angularFileUpload'])
+	.config(function($routeProvider) {
+		$routeProvider
+			//RUTAS DE USUARIOS
+			.when('/',{
+				templateUrl: 'usuario/listausuario/',
+				controller : "usuarioController"
+			})
+			.when('/formulario',{
+				templateUrl: 'usuario/formulario/',
+				controller : "usuarioAMController"
+			})
+			.when('/modulos/:id',{
+				templateUrl: 'usuario/modulos/',
+				controller: 'modulosController'
+			})
+			.when('/importador',{
+				templateUrl: 'usuario/importador/',
+				controller: 'importadorController'
+			})
+			.when('/formulario/:id',{
+				templateUrl: 'usuario/formulario/',
+				controller : "usuarioAMController",
+			})
+			//RUTAS DE SISTEMAS
+			.when('/sistemas/:id_usr/:tp_usr',{
+				templateUrl: 'sistemas/listasistemas',
+				controller : "sistemasController",
+			})
+			.otherwise({
+		        redirectTo: '/'
+		    });
+		
+	});
+
+var s = angular.module('modulos', ['ngRoute','angularFileUpload'])
+	.config(function($routeProvider) {
+		$routeProvider			
+			//RUTAS DE SISTEMAS
+			.when('/',{
+				templateUrl: function(){
+                	window.location.href = "usuario#/";				
+            	},
+            	controller : "usuarioController"
+			})
+			.when('/:id_usr/:tp_usr',{
+				templateUrl: 'modulos/listamodulos',
+				controller : "modulosController",
+			})
+			.otherwise({
+		        redirectTo: '/'
+		    });
+		
+	});
+
+
+var os = angular.module('obraSocial', ['ngRoute','angularFileUpload'])
+	.config(function($routeProvider) {
+		$routeProvider			
+			//RUTAS DE SISTEMAS
+			.when('/',{
+				templateUrl: 'obrasocial/listaobrasociales',
+            	controller : "obrasocialControllers"
+			})
+			.when('/:id_usr/:tp_usr',{
+				templateUrl: 'modulos/listamodulos',
+				controller : "obrasocialControllers",
+			})
+			.otherwise({
+		        redirectTo: '/'
+		    });
+		
+	});
+
+	

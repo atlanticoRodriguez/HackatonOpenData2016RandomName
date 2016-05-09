@@ -1,0 +1,6 @@
+Instalacion del proyecto.
+1) descargar el proyecto.
+2) generar la Base de Datos correspondiente, y subir las Tablas.
+3) Configurar el archivo /application/config/database.php
+3.1) colocar Ip del Servidor, nombre de Usuario, Calve de usuario y el nombre de la Base de Datos creada en el paso 2.
+

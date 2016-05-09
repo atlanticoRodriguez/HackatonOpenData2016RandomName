@@ -1,0 +1,57 @@
+<div class="row-fluid">
+    
+           
+    <!--/span-->
+    <div class="span12" id="content">
+                    
+        <div class="row-fluid">
+            <!-- block -->
+            <div class="block">
+                <div class="navbar navbar-inner block-header">
+                    <div class="muted pull-left"><b><?php echo $titulo; ?></b></div>
+                    <div class="muted pull-right">
+                        <input type="text" ng-model="buscador" placeholder="Buscador">
+                    </div>
+                </div>
+                                      
+                <div class="block-content collapse in">
+                    
+                    <!-- TABLA -->
+                    <div class="span12">
+                        
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" ng-model="todos_activar" ng-click="todos(checked=!checked)"></th>
+                                    <th>ID</th>
+                                    <th>Nombre y Apellido</th>                                    
+                                    <th>E-Mail</th>
+                                    <th>Usuario</th>
+                                    <th>Tipo Usuario</th>
+                                    <th>Activo</th>
+                                    <th>Creado</th>
+                                    <th>Ultima Conexion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="u in obrasociales | orderBy:'a':true | filter:buscador" 
+                                    ng-class="(u.a == 1) ? 'activado' : 'desactivado'">
+                                    <td><input type="checkbox"  ng-click="usuario(u.i)" ng-checked="todos_activar"></td>
+                                    <td>{{u.i}}</td>
+                                    <td>{{u.n}}</td>                                    
+                                    <td>{{u.e}}</td>
+                                    <td>{{u.un}}</td>
+                                    <td>{{u.tpu}}</td>
+                                    <td>{{(u.a == 1)?'Activado':'Desactivado'}}</td>
+                                    <td>{{u.co}}</td>
+                                    <td>{{u.ult_acc}}</td>
+                                </tr>                                        
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- FIN TABLA -->                     
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+class modulos extends CI_Controller {
+
+	function __construct(){
+		parent::__construct();
+		//$this->load->model('usuarioModel');
+		$this->load->library('lbusr');//Libreria de usuarios!
+		$this->load->library('lbmods');//Libreria de Sistemas!
+
+		//Verifica si esta logueado!
+		$this->lbusr->autenticacionLogin();
+	}
+
+	// Este metodo, Descodifica el array que esta en JSON... para trabajar con php
+	public function request(){
+		$request = file_get_contents('php://input');
+		return json_decode($request,true);
+	}		
+
+	public function index(){
+		$data['data']['titulo'] = 'modulos Del Usuario';
+		$data['contenido'] = 'modulos/index';
+		$this->load->view('layouts/plantilla',$data);
+	}
+
+	public function listamodulos($id=0){		
+		$data['titulo'] = 'modulos Del Usuario';
+		//$this->load->view('layouts/plantilla',$data);	
+		$this->load->view('modulos/listamodulos',$data);
+	}
+
+	public function modulosLista(){
+		$usuarios = $this->lbmods->modulosLista();
+		print_r(json_encode($usuarios));
+	}
+
+	public function usr_reg_tpusr(){
+		$usr = $this->request();
+		echo $this->lbmods->usr_reg_tpusr($usr['id'])[0]->tpusr;
+	}
+
+}

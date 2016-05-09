@@ -1,0 +1,20 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+class Lbmods {
+	protected $ci;
+   
+   	function __construct(){
+    	$this->ci =& get_instance();
+    	$this->ci->load->model('modulosmodel');
+   	}
+
+   	function modulosLista(){
+		return $this->ci->modulosmodel->modulos();
+	}
+
+	function usr_reg_tpusr($id){
+		$this->ci->load->model('usuariomodel');
+		return $this->ci->usuariomodel->usuarios($id);
+	}
+	
+}

@@ -1,0 +1,37 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+class Obrasocial extends CI_Controller {
+
+	function __construct(){
+		parent::__construct();
+		//$this->load->model('usuarioModel');
+		$this->load->library('lbobrasocial');//Libreria de usuarios!
+
+		//Verifica si esta logueado!
+		//$this->lbusr->autenticacionLogin();
+	}
+
+	// Este metodo, Descodifica el array que esta en JSON... para trabajar con php
+	public function request(){
+		$request = file_get_contents('php://input');
+		return json_decode($request,true);
+	}
+
+	public function index(){
+		$data['data']['titulo'] = 'Obras Sociales';
+		$data['contenido'] = 'obrasocial/index';
+		$this->load->view('layouts/plantilla',$data);
+	}
+
+	public function listaobrasociales(){
+		$data['titulo'] = 'LISTA';
+		//$this->load->view('layouts/plantilla',$data);	
+		$this->load->view('obrasocial/listaobrasociales',$data);
+	}
+	//Lista de usuarios, en el index, SI RECIVE UN ID, TRAE EL REGISTRO ASOCIADO AL ID
+	public function obrasociales($id = 0){
+		$usuarios = $this->lbobrasocial->obrasociales($id);
+		print_r(json_encode($usuarios));
+	}
+
+}

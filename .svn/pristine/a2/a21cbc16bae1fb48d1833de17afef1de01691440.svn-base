@@ -1,0 +1,10 @@
+<?php
+  class Modulosmodel extends CI_Model {
+    var $name="", $descr="";
+  	//TRAIGO TODOS LOS USUARIOS DE LA BASE DE DATOS!
+    	public function modulos(){         
+       	  $query = $this->db->get('modulos');
+      	  return $query->result();      
+    	}
+  }
+?>
